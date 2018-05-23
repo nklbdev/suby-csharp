@@ -51,7 +51,7 @@ namespace Suby
     {
         public Event() : base(new Subscription(null, null, null)) {}
         
-        public ISubscription Subscribe(Action handler) =>
+        public IDisposable Subscribe(Action handler) =>
             AddSubscription(new Subscription(Last, this, handler));
 
         public void Raise() => ForAllActive(s => s.Notify());
@@ -61,7 +61,7 @@ namespace Suby
     {
         public Event() : base(new Subscription<T>(null, null, null)) {}
         
-        public ISubscription Subscribe(Action<T> handler) =>
+        public IDisposable Subscribe(Action<T> handler) =>
             AddSubscription(new Subscription<T>(Last, this, handler));
         
         public void Raise(T v) => ForAllActive(s => s.Notify(v));
@@ -71,7 +71,7 @@ namespace Suby
     {
         public Event() : base(new Subscription<T1, T2>(null, null, null)) {}
         
-        public ISubscription Subscribe(Action<T1, T2> handler) =>
+        public IDisposable Subscribe(Action<T1, T2> handler) =>
             AddSubscription(new Subscription<T1, T2>(Last, this, handler));
         
         public void Raise(T1 v1, T2 v2) => ForAllActive(s => s.Notify(v1, v2));

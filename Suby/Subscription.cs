@@ -2,7 +2,7 @@
 
 namespace Suby
 {
-    public abstract class SubscriptionBase<T>: ISubscription where T: SubscriptionBase<T>
+    public abstract class SubscriptionBase<T>: IDisposable where T: SubscriptionBase<T>
     {
         internal bool IsActive = true;
         public T Next;
@@ -13,7 +13,7 @@ namespace Suby
             Previous = previous;
         }
 
-        public void Unsubscribe()
+        public void Dispose()
         {
             if (!IsActive)
                 return;

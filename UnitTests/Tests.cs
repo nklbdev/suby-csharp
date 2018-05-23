@@ -16,16 +16,15 @@ namespace UnitTests
         public void Test1()
         {
             var e = new Event();
-            e.Subscribe(Handler);
-            Assert.Throws<NotImplementedException>(() => e.Raise());
+            using (e.Subscribe(Handler))
+                Assert.Throws<NotImplementedException>(() => e.Raise());
         }
         
         [Test]
         public void Test2()
         {
             var e = new Event();
-            var subscription = e.Subscribe(Handler);
-            subscription.Unsubscribe();
+            using (e.Subscribe(Handler)) { }
             e.Raise();
         }
         
@@ -38,16 +37,15 @@ namespace UnitTests
         public void TestT1()
         {
             var e = new Event<string>();
-            e.Subscribe(Handler);
-            Assert.Throws<NotImplementedException>(() => e.Raise("some"));
+            using (e.Subscribe(Handler))
+                Assert.Throws<NotImplementedException>(() => e.Raise("some"));
         }
         
         [Test]
         public void TestT2()
         {
             var e = new Event<string>();
-            var subscription = e.Subscribe(Handler);
-            subscription.Unsubscribe();
+            using (e.Subscribe(Handler)) { }
             e.Raise("some");
         }
         
@@ -60,16 +58,15 @@ namespace UnitTests
         public void TestTT1()
         {
             var e = new Event<string, int>();
-            e.Subscribe(Handler);
-            Assert.Throws<NotImplementedException>(() => e.Raise("some", 42));
+            using (e.Subscribe(Handler))
+                Assert.Throws<NotImplementedException>(() => e.Raise("some", 42));
         }
         
         [Test]
         public void TestTT2()
         {
             var e = new Event<string, int>();
-            var subscription = e.Subscribe(Handler);
-            subscription.Unsubscribe();
+            using (e.Subscribe(Handler)) { }
             e.Raise("some", 42);
         }
     }
