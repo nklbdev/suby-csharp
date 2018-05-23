@@ -34,7 +34,7 @@ namespace Suby
             }
         }
 
-        internal void OnDeactivated(T s)
+        internal void OnDisposed(T s)
         {
             if (s == Last)
                 Last = s.Previous;

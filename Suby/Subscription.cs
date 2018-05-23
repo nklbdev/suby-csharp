@@ -18,12 +18,12 @@ namespace Suby
             if (IsDisposed)
                 return;
             IsDisposed = true;
-            UnsubscribeInternal();
+            DisposeInternal();
         }
 
-        protected abstract void UnsubscribeInternal();
+        protected abstract void DisposeInternal();
         
-        internal static void UnsubscribeInternalSome(T l)
+        internal static void Detach(T l)
         {
             l.Previous.Next = l.Next;
             if (l.Next != null)
@@ -43,10 +43,10 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void UnsubscribeInternal()
+        protected override void DisposeInternal()
         {
-            UnsubscribeInternalSome(this);
-            _event.OnDeactivated(this);
+            Detach(this);
+            _event.OnDisposed(this);
         }
 
         public void Notify()
@@ -67,10 +67,10 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void UnsubscribeInternal()
+        protected override void DisposeInternal()
         {
-            UnsubscribeInternalSome(this);
-            _event.OnDeactivated(this);
+            Detach(this);
+            _event.OnDisposed(this);
         }
         
         public void Notify(T v)
@@ -91,10 +91,10 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void UnsubscribeInternal()
+        protected override void DisposeInternal()
         {
-            UnsubscribeInternalSome(this);
-            _event.OnDeactivated(this);
+            Detach(this);
+            _event.OnDisposed(this);
         }
         
         public void Notify(T1 v1, T2 v2)
