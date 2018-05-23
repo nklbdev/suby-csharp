@@ -46,3 +46,31 @@ using (e1.Subscribe(handler))
 }
 e1.Raise("Good bye... oops!");
 ```
+
+You can publish your event to subscribers as ISubscriptable without access to Raise method:
+
+```cs
+public class Publisher
+{
+    private readonly Event _somethingHappened = new Event();
+    public ISubscriptable SomethingHappened => _somethingHappened;
+}
+```
+And you can pass subscriptables to subscribers via their constructors or other methods:
+
+```cs
+public class Subscriber
+{
+    private readonly IDisposable _subscription;
+
+    public Subscriber(ISubscriptable e)
+    {
+        _subscription = e.Subscribe(Handler);
+    }
+
+    public void Handler()
+    {
+        // without code
+    }
+}
+```
