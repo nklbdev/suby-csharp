@@ -16,7 +16,8 @@ namespace UnitTests
         public void Test1()
         {
             var e = new Event();
-            using (e.Subscribe(Handler))
+            ISubscriptable subscriptable = e;
+            using (subscriptable.Subscribe(Handler))
                 Assert.Throws<NotImplementedException>(() => e.Raise());
         }
         
@@ -24,7 +25,8 @@ namespace UnitTests
         public void Test2()
         {
             var e = new Event();
-            using (e.Subscribe(Handler)) { }
+            ISubscriptable subscriptable = e;
+            using (subscriptable.Subscribe(Handler)) { }
             e.Raise();
         }
         
@@ -37,7 +39,8 @@ namespace UnitTests
         public void TestT1()
         {
             var e = new Event<string>();
-            using (e.Subscribe(Handler))
+            ISubscriptable<string> subscriptable = e;
+            using (subscriptable.Subscribe(Handler))
                 Assert.Throws<NotImplementedException>(() => e.Raise("some"));
         }
         
@@ -45,7 +48,8 @@ namespace UnitTests
         public void TestT2()
         {
             var e = new Event<string>();
-            using (e.Subscribe(Handler)) { }
+            ISubscriptable<string> subscriptable = e;
+            using (subscriptable.Subscribe(Handler)) { }
             e.Raise("some");
         }
         
@@ -58,7 +62,8 @@ namespace UnitTests
         public void TestTT1()
         {
             var e = new Event<string, int>();
-            using (e.Subscribe(Handler))
+            ISubscriptable<string, int> subscriptable = e;
+            using (subscriptable.Subscribe(Handler))
                 Assert.Throws<NotImplementedException>(() => e.Raise("some", 42));
         }
         
@@ -66,7 +71,8 @@ namespace UnitTests
         public void TestTT2()
         {
             var e = new Event<string, int>();
-            using (e.Subscribe(Handler)) { }
+            ISubscriptable<string, int> subscriptable = e;
+            using (subscriptable.Subscribe(Handler)) { }
             e.Raise("some", 42);
         }
     }
