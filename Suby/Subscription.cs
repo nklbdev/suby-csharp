@@ -4,7 +4,7 @@ namespace Suby
 {
     public abstract class SubscriptionBase<T>: IDisposable where T: SubscriptionBase<T>
     {
-        internal bool IsActive = true;
+        internal bool IsDisposed;
         public T Next;
         public T Previous;
 
@@ -15,9 +15,9 @@ namespace Suby
 
         public void Dispose()
         {
-            if (!IsActive)
+            if (IsDisposed)
                 return;
-            IsActive = false;
+            IsDisposed = true;
             UnsubscribeInternal();
         }
 
@@ -29,12 +29,6 @@ namespace Suby
             if (l.Next != null)
                 l.Next.Previous = l.Previous;
             l.Next = null;
-        }
-
-        protected void WhenActive(Action action)
-        {
-            if (IsActive)
-                action();
         }
     }
 
@@ -55,7 +49,11 @@ namespace Suby
             _event.OnDeactivated(this);
         }
 
-        public void Notify() => WhenActive(() => _handler());
+        public void Notify()
+        {
+            if (!IsDisposed)
+                _handler();
+        }
     }
     
     public class Subscription<T>: SubscriptionBase<Subscription<T>>
@@ -75,7 +73,11 @@ namespace Suby
             _event.OnDeactivated(this);
         }
         
-        public void Notify(T v) => WhenActive(() => _handler(v));
+        public void Notify(T v)
+        {
+            if (!IsDisposed)
+                _handler(v);
+        }
     }
     
     public class Subscription<T1, T2>: SubscriptionBase<Subscription<T1, T2>>
@@ -95,6 +97,10 @@ namespace Suby
             _event.OnDeactivated(this);
         }
         
-        public void Notify(T1 v1, T2 v2) => WhenActive(() => _handler(v1, v2));
+        public void Notify(T1 v1, T2 v2)
+        {
+            if (!IsDisposed)
+                _handler(v1, v2);
+        }
     }
 }
