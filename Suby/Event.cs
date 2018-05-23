@@ -16,10 +16,10 @@ namespace Suby
 
         private static T GetNextActive(T s)
         {
-            if (s.IsActive)
+            if (!s.IsDisposed)
                 return s.Next;
             var p = s.Previous;
-            while (!p.IsActive)
+            while (p.IsDisposed)
                 p = p.Previous;
             return s.Next;
         }
