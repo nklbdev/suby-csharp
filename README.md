@@ -2,9 +2,11 @@
 Better events (not yet thread-safe)
 
 To create an event simply call one of default constructors:
+```cs
 var e1 = new Event();
 var e2 = new Event<string>();
 var e3 = new Event<string, int>();
+```
 ... and so on
 
 Then subscribe to the event:
