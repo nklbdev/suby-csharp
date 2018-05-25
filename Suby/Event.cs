@@ -73,4 +73,34 @@ namespace Suby
         
         public void Raise(T1 v1, T2 v2) => ForAllActive(s => s.Notify(v1, v2));
     }
+    
+    public class Event<T1, T2, T3>: EventBase<Subscription<T1, T2, T3>>, IEvent<T1, T2, T3>
+    {
+        public Event() : base(new Subscription<T1, T2, T3>(null, null, null)) {}
+        
+        public IDisposable Subscribe(Action<T1, T2, T3> handler) =>
+            AddSubscription(new Subscription<T1, T2, T3>(Last, this, handler));
+        
+        public void Raise(T1 v1, T2 v2, T3 v3) => ForAllActive(s => s.Notify(v1, v2, v3));
+    }
+    
+    public class Event<T1, T2, T3, T4>: EventBase<Subscription<T1, T2, T3, T4>>, IEvent<T1, T2, T3, T4>
+    {
+        public Event() : base(new Subscription<T1, T2, T3, T4>(null, null, null)) {}
+        
+        public IDisposable Subscribe(Action<T1, T2, T3, T4> handler) =>
+            AddSubscription(new Subscription<T1, T2, T3, T4>(Last, this, handler));
+        
+        public void Raise(T1 v1, T2 v2, T3 v3, T4 v4) => ForAllActive(s => s.Notify(v1, v2, v3, v4));
+    }
+    
+    public class Event<T1, T2, T3, T4, T5>: EventBase<Subscription<T1, T2, T3, T4, T5>>, IEvent<T1, T2, T3, T4, T5>
+    {
+        public Event() : base(new Subscription<T1, T2, T3, T4, T5>(null, null, null)) {}
+        
+        public IDisposable Subscribe(Action<T1, T2, T3, T4, T5> handler) =>
+            AddSubscription(new Subscription<T1, T2, T3, T4, T5>(Last, this, handler));
+        
+        public void Raise(T1 v1, T2 v2, T3 v3, T4 v4, T5 v5) => ForAllActive(s => s.Notify(v1, v2, v3, v4, v5));
+    }
 }

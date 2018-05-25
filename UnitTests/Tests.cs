@@ -13,6 +13,11 @@ namespace UnitTests
             throw new NotImplementedException();
         }
         
+        private static void Handler5(int a, string b, bool c, char d, object e)
+        {
+            throw new NotImplementedException();
+        }
+        
         [Test]
         public void Test1()
         {
@@ -20,6 +25,15 @@ namespace UnitTests
             ISubscriptable subscriptable = e;
             using (subscriptable.Subscribe(Handler))
                 Assert.Throws<NotImplementedException>(() => e.Raise());
+        }
+        
+        [Test]
+        public void Test5()
+        {
+            var e = new Event<int, string, bool, char, object>();
+            ISubscriptable<int, string, bool, char, object> subscriptable = e;
+            using (subscriptable.Subscribe(Handler5))
+                Assert.Throws<NotImplementedException>(() => e.Raise(3, "asd", false, 'e', new object()));
         }
         
         [Test]
