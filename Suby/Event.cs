@@ -16,11 +16,8 @@ namespace Suby
 
         private static TSubscription GetNextActive(TSubscription s)
         {
-            if (!s.IsDisposed)
-                return s.Next;
-            var p = s.Previous;
-            while (p.IsDisposed)
-                p = p.Previous;
+            while (s.IsDisposed)
+                s = s.Previous;
             return s.Next;
         }
 
