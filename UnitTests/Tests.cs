@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Suby;
 
@@ -74,6 +75,18 @@ namespace UnitTests
             ISubscriptable<string, int> subscriptable = e;
             using (subscriptable.Subscribe(Handler)) { }
             e.Raise("some", 42);
+        }
+
+        [Test]
+        public void NewHandlerWillBeInvoked_IfItIsSubscribedInNotifyingProgress()
+        {
+            var e = new Event();
+            var secondHandlerIsInvoked = false;
+            e.Subscribe(() =>
+                e.Subscribe(() =>
+                    secondHandlerIsInvoked = true));
+            e.Raise();
+            Assert.IsTrue(secondHandlerIsInvoked);
         }
     }
 }
