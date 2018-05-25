@@ -2,19 +2,19 @@
 
 namespace Suby
 {
-    public abstract class EventBase<T> where T: SubscriptionBase<T>
+    public abstract class EventBase<TSubscription> where TSubscription: SubscriptionBase<TSubscription>
     {
-        private readonly T _first;
-        protected T Last;
+        private readonly TSubscription _first;
+        protected TSubscription Last;
 
-        protected T AddSubscription(T s)
+        protected TSubscription AddSubscription(TSubscription s)
         {
             Last.Next = s;
             Last = s;
             return s;
         }
 
-        private static T GetNextActive(T s)
+        private static TSubscription GetNextActive(TSubscription s)
         {
             if (!s.IsDisposed)
                 return s.Next;
@@ -24,7 +24,7 @@ namespace Suby
             return s.Next;
         }
 
-        protected void ForAllActive(Action<T> action)
+        protected void ForAllActive(Action<TSubscription> action)
         {
             var s = _first.Next;
             while (s != null)
@@ -34,13 +34,13 @@ namespace Suby
             }
         }
 
-        internal void OnDisposed(T s)
+        internal void OnDisposed(TSubscription s)
         {
             if (s == Last)
                 Last = s.Previous;
         }
 
-        protected EventBase(T dummy)
+        protected EventBase(TSubscription dummy)
         {
             _first = dummy;
             Last = dummy;

@@ -2,13 +2,13 @@
 
 namespace Suby
 {
-    public abstract class SubscriptionBase<T>: IDisposable where T: SubscriptionBase<T>
+    public abstract class SubscriptionBase<TSubscription>: IDisposable where TSubscription: SubscriptionBase<TSubscription>
     {
         internal bool IsDisposed;
-        public T Next;
-        public T Previous;
+        public TSubscription Next;
+        public TSubscription Previous;
 
-        protected SubscriptionBase(T previous)
+        protected SubscriptionBase(TSubscription previous)
         {
             Previous = previous;
         }
@@ -18,18 +18,16 @@ namespace Suby
             if (IsDisposed)
                 return;
             IsDisposed = true;
-            DisposeInternal();
+
+            Previous.Next = Next;
+            if (Next != null)
+                Next.Previous = Previous;
+            Next = null;
+
+            NotifyDisposed();
         }
 
-        protected abstract void DisposeInternal();
-        
-        internal static void Detach(T l)
-        {
-            l.Previous.Next = l.Next;
-            if (l.Next != null)
-                l.Next.Previous = l.Previous;
-            l.Next = null;
-        }
+        protected abstract void NotifyDisposed();
     }
 
     public class Subscription: SubscriptionBase<Subscription>
@@ -43,11 +41,7 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void DisposeInternal()
-        {
-            Detach(this);
-            _event.OnDisposed(this);
-        }
+        protected override void NotifyDisposed() => _event.OnDisposed(this);
 
         public void Notify()
         {
@@ -67,12 +61,8 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void DisposeInternal()
-        {
-            Detach(this);
-            _event.OnDisposed(this);
-        }
-        
+        protected override void NotifyDisposed() => _event.OnDisposed(this);
+
         public void Notify(T v)
         {
             if (!IsDisposed)
@@ -91,12 +81,8 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void DisposeInternal()
-        {
-            Detach(this);
-            _event.OnDisposed(this);
-        }
-        
+        protected override void NotifyDisposed() => _event.OnDisposed(this);
+
         public void Notify(T1 v1, T2 v2)
         {
             if (!IsDisposed)
