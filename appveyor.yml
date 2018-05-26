@@ -7,7 +7,6 @@ skip_commits:
     - '**/*.md'
 environment:
   EnableNuGetPackageRestore: true
-  Appveyor: true
 init:
   - git config --global core.autocrlf input
 nuget:
