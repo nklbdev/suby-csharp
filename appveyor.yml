@@ -1,0 +1,25 @@
+image: Visual Studio 2017
+
+skip_branch_with_pr: true
+skip_tags: true
+skip_commits:
+  files:
+    - '**/*.md'
+environment:
+  EnableNuGetPackageRestore: true
+  Appveyor: true
+init:
+  - git config --global core.autocrlf input
+nuget:
+  disable_publish_on_pr: true
+test: off
+artifacts:
+  - path: .\.nupkgs\*.nupkg
+deploy:
+- provider: NuGet
+  server: https://api.nuget.org/v3/
+  on:
+    branch: master  
+  api_key:
+    secure: bFMIvInvgG1fGl+fI1Za1V1LvQdhWuEBTFGTvr0iluFl03x+7mG7BwUth/nwc3NI
+  
