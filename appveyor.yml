@@ -24,8 +24,8 @@ build:
 #init:
 #  - git config --global core.autocrlf input
 #test: off
-#artifacts:
-#  - path: .\.nupkgs\*.nupkg
+artifacts:
+  - path: .\.nupkgs\*.nupkg
 deploy:
 - provider: NuGet
 #  server: https://api.nuget.org/v3/
