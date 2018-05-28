@@ -1,4 +1,5 @@
 image: Visual Studio 2017
+configuration: Release
 
 version: 0.0.{build}
 environment:
@@ -14,12 +15,12 @@ nuget:
   project_feed: true
 before_build:
   - nuget restore
-after_build:
-  - nuget pack
 build:
   publish_nuget: true
   include_nuget_references: true
   verbosity: minimal
+#after_build:
+#  - nuget pack
 #init:
 #  - git config --global core.autocrlf input
 #test: off

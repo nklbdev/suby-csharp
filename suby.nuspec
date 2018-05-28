@@ -13,6 +13,6 @@
         <tags>events subscriptions</tags>
     </metadata>
     <files>
-        <file src="Suby.dll" target="lib" />
+        <file src="bin\Release\Suby.dll" target="lib" />
     </files>
 </package>
