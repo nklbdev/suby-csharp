@@ -1,8 +1,8 @@
 image: Visual Studio 2017
 
-version: 1.0.{build}
+version: 0.0.{build}
 environment:
-  version: 1.0.{build}
+  version: 0.0.{build}
 
 #skip_branch_with_pr: true
 #skip_tags: true
