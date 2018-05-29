@@ -2,6 +2,7 @@
 Better events (not yet thread-safe)
 
 [![Build status](https://ci.appveyor.com/api/projects/status/boxmp393o0u878kv?svg=true)](https://ci.appveyor.com/project/nklbdev/suby-csharp)
+[![NuGet version](https://badge.fury.io/nu/Suby.nklbdev.svg)](https://www.nuget.org/packages/Suby.nklbdev)
 
 To create an event simply call one of default constructors:
 ```cs
