@@ -21,7 +21,7 @@ skip_commits:
 deploy:
   - provider: NuGet
     on:
-      branch: master  
+      branch: master
     api_key:
       secure: bFMIvInvgG1fGl+fI1Za1V1LvQdhWuEBTFGTvr0iluFl03x+7mG7BwUth/nwc3NI
     artifact: /.*\.nupkg/
