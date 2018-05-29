@@ -1,5 +1,6 @@
 # suby-csharp
 Better events (not yet thread-safe)
+[![Build status](https://ci.appveyor.com/api/projects/status/boxmp393o0u878kv?svg=true)](https://ci.appveyor.com/project/nklbdev/suby-csharp)
 
 To create an event simply call one of default constructors:
 ```cs
