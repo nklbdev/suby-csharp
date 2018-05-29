@@ -5,9 +5,11 @@ branches:
 image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
+skip_tags: true
 nuget:
   account_feed: true
   project_feed: true
+  disable_publish_on_pr: true
 build:
   project: Suby
   publish_nuget: true
