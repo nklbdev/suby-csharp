@@ -7,7 +7,7 @@
     <authors>Nikolay Lebedev</authors>
     <owners>Nikolay Lebedev</owners>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Better non thread-safe events for C#</description>
     <releaseNotes>First release</releaseNotes>
     <projectUrl>https://github.com/nklbdev/suby-csharp</projectUrl>
