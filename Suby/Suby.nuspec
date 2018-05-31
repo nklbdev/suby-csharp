@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Suby</id>
+    <id>suby.nklbdev</id>
     <version>0.0.1</version>
     <title>Suby</title>
     <authors>Nikolay Lebedev</authors>
