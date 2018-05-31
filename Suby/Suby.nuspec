@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>suby.nklbdev</id>
-    <version>0.0.2</version>
+    <version>0.1.1</version>
     <title>Suby</title>
     <authors>Nikolay Lebedev</authors>
     <owners>Nikolay Lebedev</owners>
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Alternate non thread-safe events for C#</description>
-    <releaseNotes>First release</releaseNotes>
+    <releaseNotes>Solved the problem with notification on subscriptions added to the tail during the current notification iteration</releaseNotes>
     <projectUrl>https://github.com/nklbdev/suby-csharp</projectUrl>
     <tags>events subscriptions</tags>
   </metadata>

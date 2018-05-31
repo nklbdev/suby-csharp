@@ -14,20 +14,25 @@ namespace Suby
             return s;
         }
 
-        private static TSubscription GetNextActive(TSubscription s)
+        private static TSubscription ToTrunk(TSubscription s)
         {
             while (s.IsDisposed)
                 s = s.Previous;
-            return s.Next;
+            return s;
         }
 
-        protected void ForAllActive(Action<TSubscription> action)
+        protected void ForCurrentTrunk(Action<TSubscription> action)
         {
-            var s = _first.Next;
-            while (s != null)
+            var s = _first;
+            var l = Last;
+            while (s != l)
             {
+                s = s.Next;
+                if (s == null)
+                    break;
                 action(s);
-                s = GetNextActive(s);
+                s = ToTrunk(s);
+                l = ToTrunk(l);
             }
         }
 
