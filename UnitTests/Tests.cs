@@ -92,7 +92,7 @@ namespace UnitTests
         }
 
         [Test]
-        public void NewHandlerWillBeInvoked_IfItIsSubscribedInNotifyingProgress()
+        public void NewHandlerWillNotBeInvoked_IfItIsSubscribedInNotifyingProgress()
         {
             var e = new Event();
             var secondHandlerIsInvoked = false;
@@ -100,7 +100,7 @@ namespace UnitTests
                 e.Subscribe(() =>
                     secondHandlerIsInvoked = true));
             e.Raise();
-            Assert.IsTrue(secondHandlerIsInvoked);
+            Assert.IsFalse(secondHandlerIsInvoked);
         }
     }
 }
