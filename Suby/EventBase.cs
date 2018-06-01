@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Suby
 {
@@ -14,20 +14,13 @@ namespace Suby
             return s;
         }
 
-        private static TSubscription GetNextActive(TSubscription s)
-        {
-            while (s.IsDisposed)
-                s = s.Previous;
-            return s.Next;
-        }
-
-        protected void ForAllActive(Action<TSubscription> action)
+        protected IEnumerable<TSubscription> GetCurrentTrunk()
         {
             var s = _first.Next;
             while (s != null)
             {
-                action(s);
-                s = GetNextActive(s);
+                yield return s;
+                s = s.Next;
             }
         }
 

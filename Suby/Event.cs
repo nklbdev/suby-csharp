@@ -9,7 +9,8 @@ namespace Suby
         public IDisposable Subscribe(Action handler) =>
             AddSubscription(new Subscription(Last, this, handler));
 
-        public void Raise() => ForAllActive(s => s.Notify());
+        public void Raise()
+        { foreach (var subscription in GetCurrentTrunk()) subscription.Notify(); }
     }
     
     public class Event<T>: EventBase<Subscription<T>>, IEvent<T>
@@ -19,7 +20,8 @@ namespace Suby
         public IDisposable Subscribe(Action<T> handler) =>
             AddSubscription(new Subscription<T>(Last, this, handler));
         
-        public void Raise(T v) => ForAllActive(s => s.Notify(v));
+        public void Raise(T v)
+        { foreach (var subscription in GetCurrentTrunk()) subscription.Notify(v); }
     }
     
     public class Event<T1, T2>: EventBase<Subscription<T1, T2>>, IEvent<T1, T2>
@@ -29,7 +31,8 @@ namespace Suby
         public IDisposable Subscribe(Action<T1, T2> handler) =>
             AddSubscription(new Subscription<T1, T2>(Last, this, handler));
         
-        public void Raise(T1 v1, T2 v2) => ForAllActive(s => s.Notify(v1, v2));
+        public void Raise(T1 v1, T2 v2)
+        { foreach (var subscription in GetCurrentTrunk()) subscription.Notify(v1, v2); }
     }
     
     public class Event<T1, T2, T3>: EventBase<Subscription<T1, T2, T3>>, IEvent<T1, T2, T3>
@@ -39,7 +42,8 @@ namespace Suby
         public IDisposable Subscribe(Action<T1, T2, T3> handler) =>
             AddSubscription(new Subscription<T1, T2, T3>(Last, this, handler));
         
-        public void Raise(T1 v1, T2 v2, T3 v3) => ForAllActive(s => s.Notify(v1, v2, v3));
+        public void Raise(T1 v1, T2 v2, T3 v3)
+        { foreach (var subscription in GetCurrentTrunk()) subscription.Notify(v1, v2, v3); }
     }
     
     public class Event<T1, T2, T3, T4>: EventBase<Subscription<T1, T2, T3, T4>>, IEvent<T1, T2, T3, T4>
@@ -49,7 +53,8 @@ namespace Suby
         public IDisposable Subscribe(Action<T1, T2, T3, T4> handler) =>
             AddSubscription(new Subscription<T1, T2, T3, T4>(Last, this, handler));
         
-        public void Raise(T1 v1, T2 v2, T3 v3, T4 v4) => ForAllActive(s => s.Notify(v1, v2, v3, v4));
+        public void Raise(T1 v1, T2 v2, T3 v3, T4 v4)
+        { foreach (var subscription in GetCurrentTrunk()) subscription.Notify(v1, v2, v3, v4); }
     }
     
     public class Event<T1, T2, T3, T4, T5>: EventBase<Subscription<T1, T2, T3, T4, T5>>, IEvent<T1, T2, T3, T4, T5>
@@ -59,6 +64,7 @@ namespace Suby
         public IDisposable Subscribe(Action<T1, T2, T3, T4, T5> handler) =>
             AddSubscription(new Subscription<T1, T2, T3, T4, T5>(Last, this, handler));
         
-        public void Raise(T1 v1, T2 v2, T3 v3, T4 v4, T5 v5) => ForAllActive(s => s.Notify(v1, v2, v3, v4, v5));
+        public void Raise(T1 v1, T2 v2, T3 v3, T4 v4, T5 v5)
+        { foreach (var subscription in GetCurrentTrunk()) subscription.Notify(v1, v2, v3, v4, v5); }
     }
 }

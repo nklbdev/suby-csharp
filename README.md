@@ -1,9 +1,21 @@
-# suby-csharp
-Better events (not yet thread-safe)
+# Suby
 
 [![Build status](https://ci.appveyor.com/api/projects/status/boxmp393o0u878kv?svg=true)](https://ci.appveyor.com/project/nklbdev/suby-csharp)
 [![NuGet version](https://badge.fury.io/nu/suby.nklbdev.svg)](https://www.nuget.org/packages/suby.nklbdev)
 [![CodeFactor](https://www.codefactor.io/repository/github/nklbdev/suby-csharp/badge)](https://www.codefactor.io/repository/github/nklbdev/suby-csharp)
+
+- Что это
+Better events (not yet thread-safe)
+- Какие проблемы решает
+    - решает проблему со сравниванием события с null перед вызовом.
+    - решает проблему необходимости хранить ссылку на объект-издатель в объектах-слушателях
+    - решает проблему владения событием и только подпиской на событие
+    - решает проблему оповещения слушателей после их отписки, если текущий цикл оповещения еще не закончился
+- Как использовать
+    - указано ниже
+- Как установить
+    - from nuget
+- Нужна помощь, чтобы сделать их потокобезопасными
 
 To create an event simply call one of default constructors:
 ```cs

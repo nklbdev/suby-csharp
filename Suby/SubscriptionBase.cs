@@ -4,13 +4,24 @@ namespace Suby
 {
     public abstract class SubscriptionBase<TSubscription>: IDisposable where TSubscription: SubscriptionBase<TSubscription>
     {
-        internal bool IsDisposed;
-        public TSubscription Next;
-        public TSubscription Previous;
+        protected bool IsDisposed;
+        private TSubscription _previous;
+        private TSubscription _next;
+
+        public TSubscription Next
+        {
+            get => IsDisposed ? Previous._next : _next;
+            set => _next = value == null ? null : value.IsDisposed ? value.Next : value;
+        }
+
+        public TSubscription Previous {
+            get => IsDisposed ? _previous.Next : _previous;
+            set => _previous = value.IsDisposed ? value.Previous : value;
+        }
 
         protected SubscriptionBase(TSubscription previous)
         {
-            Previous = previous;
+            _previous = previous;
         }
 
         public void Dispose()
@@ -19,10 +30,10 @@ namespace Suby
                 return;
             IsDisposed = true;
 
-            Previous.Next = Next;
-            if (Next != null)
-                Next.Previous = Previous;
-            Next = null;
+            _previous.Next = _next;
+            if (_next != null)
+                _next.Previous = _previous;
+            _next = null;
 
             NotifyDisposed();
         }
