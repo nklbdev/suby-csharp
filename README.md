@@ -4,18 +4,18 @@
 [![NuGet version](https://badge.fury.io/nu/suby.nklbdev.svg)](https://www.nuget.org/packages/suby.nklbdev)
 [![CodeFactor](https://www.codefactor.io/repository/github/nklbdev/suby-csharp/badge)](https://www.codefactor.io/repository/github/nklbdev/suby-csharp)
 
-- Что это
-Better events (not yet thread-safe)
-- Какие проблемы решает
-    - решает проблему со сравниванием события с null перед вызовом.
-    - решает проблему необходимости хранить ссылку на объект-издатель в объектах-слушателях
-    - решает проблему владения событием и только подпиской на событие
-    - решает проблему оповещения слушателей после их отписки, если текущий цикл оповещения еще не закончился
-- Как использовать
-    - указано ниже
-- Как установить
-    - from nuget
-- Нужна помощь, чтобы сделать их потокобезопасными
+Alternate events for C# (not yet thread-safe)
+
+## The problems it solves
+
+- Necessity of checking the event for null before raising
+- Necessity to store a reference to the publishing object in the subscriber objects
+- The problem of ownership of the event, or just subscription
+- The problem of notifying some listeners after they have been unsubscribed, if the current notification cycle has not yet ended
+
+Need help with development to add thread safety
+
+## How to use
 
 To create an event simply call one of default constructors:
 ```cs
