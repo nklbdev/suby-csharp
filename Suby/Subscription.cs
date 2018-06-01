@@ -13,13 +13,9 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void NotifyDisposed() => _event.OnDisposed(this);
+        public override void Dispose() => _event.DisposeSubscription(this);
 
-        public void Notify()
-        {
-            if (!IsDisposed)
-                _handler();
-        }
+        public void Notify() => _handler();
     }
     
     public class Subscription<T>: SubscriptionBase<Subscription<T>>
@@ -33,13 +29,9 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void NotifyDisposed() => _event.OnDisposed(this);
+        public override void Dispose() => _event.DisposeSubscription(this);
 
-        public void Notify(T v)
-        {
-            if (!IsDisposed)
-                _handler(v);
-        }
+        public void Notify(T v) => _handler(v);
     }
     
     public class Subscription<T1, T2>: SubscriptionBase<Subscription<T1, T2>>
@@ -53,13 +45,9 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void NotifyDisposed() => _event.OnDisposed(this);
+        public override void Dispose() => _event.DisposeSubscription(this);
 
-        public void Notify(T1 v1, T2 v2)
-        {
-            if (!IsDisposed)
-                _handler(v1, v2);
-        }
+        public void Notify(T1 v1, T2 v2) => _handler(v1, v2);
     }
     
     public class Subscription<T1, T2, T3>: SubscriptionBase<Subscription<T1, T2, T3>>
@@ -74,13 +62,9 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void NotifyDisposed() => _event.OnDisposed(this);
+        public override void Dispose() => _event.DisposeSubscription(this);
 
-        public void Notify(T1 v1, T2 v2, T3 v3)
-        {
-            if (!IsDisposed)
-                _handler(v1, v2, v3);
-        }
+        public void Notify(T1 v1, T2 v2, T3 v3) => _handler(v1, v2, v3);
     }
     
     public class Subscription<T1, T2, T3, T4>: SubscriptionBase<Subscription<T1, T2, T3, T4>>
@@ -98,13 +82,9 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void NotifyDisposed() => _event.OnDisposed(this);
+        public override void Dispose() => _event.DisposeSubscription(this);
 
-        public void Notify(T1 v1, T2 v2, T3 v3, T4 v4)
-        {
-            if (!IsDisposed)
-                _handler(v1, v2, v3, v4);
-        }
+        public void Notify(T1 v1, T2 v2, T3 v3, T4 v4) => _handler(v1, v2, v3, v4);
     }
     
     public class Subscription<T1, T2, T3, T4, T5>: SubscriptionBase<Subscription<T1, T2, T3, T4, T5>>
@@ -122,12 +102,8 @@ namespace Suby
             _handler = handler;
         }
 
-        protected override void NotifyDisposed() => _event.OnDisposed(this);
+        public override void Dispose() => _event.DisposeSubscription(this);
 
-        public void Notify(T1 v1, T2 v2, T3 v3, T4 v4, T5 v5)
-        {
-            if (!IsDisposed)
-                _handler(v1, v2, v3, v4, v5);
-        }
+        public void Notify(T1 v1, T2 v2, T3 v3, T4 v4, T5 v5) => _handler(v1, v2, v3, v4, v5);
     }
 }
