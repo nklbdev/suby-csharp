@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Suby
 {
@@ -14,25 +14,13 @@ namespace Suby
             return s;
         }
 
-        private static TSubscription ToTrunk(TSubscription s)
+        protected IEnumerable<TSubscription> GetCurrentTrunk()
         {
-            while (s.IsDisposed)
-                s = s.Previous;
-            return s;
-        }
-
-        protected void ForCurrentTrunk(Action<TSubscription> action)
-        {
-            var s = _first;
-            var l = Last;
-            while (s != l)
+            var s = _first.Next;
+            while (s != null)
             {
+                yield return s;
                 s = s.Next;
-                if (s == null)
-                    break;
-                action(s);
-                s = ToTrunk(s);
-                l = ToTrunk(l);
             }
         }
 
