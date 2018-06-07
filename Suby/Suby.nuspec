@@ -9,7 +9,7 @@
     <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>Alternate non thread-safe events for C#</description>
-    <releaseNotes>First release</releaseNotes>
+    <releaseNotes>Added thread-safe event classes and implemented generics up to 16 parameters.</releaseNotes>
     <projectUrl>https://github.com/nklbdev/suby-csharp</projectUrl>
     <tags>events subscriptions</tags>
   </metadata>
