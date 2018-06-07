@@ -4,7 +4,7 @@ using Suby;
 
 namespace ConcurrencyBenchmark
 {
-    internal class Program
+    internal static class Program
     {
         private static void Operation(IEvent e)
         {

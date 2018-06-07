@@ -8,7 +8,10 @@ namespace Suby
         internal TSubscription Previous;
         internal TSubscription Next;
 
-        protected SubscriptionBase(TSubscription previous) => Previous = previous;
+        protected SubscriptionBase(TSubscription previous)
+        {
+            Previous = previous;
+        }
 
         public abstract void Dispose();
     }
