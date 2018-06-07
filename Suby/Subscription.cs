@@ -4,10 +4,10 @@ namespace Suby
 {
     public class Subscription: SubscriptionBase<Subscription>
     {
-        private readonly Event _event;
+        private readonly EventBase<Subscription> _event;
         private readonly Action _handler;
 
-        public Subscription(Subscription previous, Event e, Action handler) : base(previous)
+        public Subscription(Subscription previous, EventBase<Subscription> e, Action handler) : base(previous)
         {
             _event = e;
             _handler = handler;
@@ -20,10 +20,10 @@ namespace Suby
     
     public class Subscription<T>: SubscriptionBase<Subscription<T>>
     {
-        private readonly Event<T> _event;
+        private readonly EventBase<Subscription<T>> _event;
         private readonly Action<T> _handler;
 
-        public Subscription(Subscription<T> previous, Event<T> e, Action<T> handler) : base(previous)
+        public Subscription(Subscription<T> previous, EventBase<Subscription<T>> e, Action<T> handler) : base(previous)
         {
             _event = e;
             _handler = handler;
@@ -36,10 +36,10 @@ namespace Suby
     
     public class Subscription<T1, T2>: SubscriptionBase<Subscription<T1, T2>>
     {
-        private readonly Event<T1, T2> _event;
+        private readonly EventBase<Subscription<T1, T2>> _event;
         private readonly Action<T1, T2> _handler;
 
-        public Subscription(Subscription<T1, T2> previous, Event<T1, T2> e, Action<T1, T2> handler) : base(previous)
+        public Subscription(Subscription<T1, T2> previous, EventBase<Subscription<T1, T2>> e, Action<T1, T2> handler) : base(previous)
         {
             _event = e;
             _handler = handler;
@@ -52,10 +52,10 @@ namespace Suby
     
     public class Subscription<T1, T2, T3>: SubscriptionBase<Subscription<T1, T2, T3>>
     {
-        private readonly Event<T1, T2, T3> _event;
+        private readonly EventBase<Subscription<T1, T2, T3>> _event;
         private readonly Action<T1, T2, T3> _handler;
 
-        public Subscription(Subscription<T1, T2, T3> previous, Event<T1, T2, T3> e, Action<T1, T2, T3> handler)
+        public Subscription(Subscription<T1, T2, T3> previous, EventBase<Subscription<T1, T2, T3>> e, Action<T1, T2, T3> handler)
             : base(previous)
         {
             _event = e;
@@ -69,12 +69,12 @@ namespace Suby
     
     public class Subscription<T1, T2, T3, T4>: SubscriptionBase<Subscription<T1, T2, T3, T4>>
     {
-        private readonly Event<T1, T2, T3, T4> _event;
+        private readonly EventBase<Subscription<T1, T2, T3, T4>> _event;
         private readonly Action<T1, T2, T3, T4> _handler;
 
         public Subscription(
             Subscription<T1, T2, T3, T4> previous,
-            Event<T1, T2, T3, T4> e,
+            EventBase<Subscription<T1, T2, T3, T4>> e,
             Action<T1, T2, T3, T4> handler)
             : base(previous)
         {
@@ -89,12 +89,12 @@ namespace Suby
     
     public class Subscription<T1, T2, T3, T4, T5>: SubscriptionBase<Subscription<T1, T2, T3, T4, T5>>
     {
-        private readonly Event<T1, T2, T3, T4, T5> _event;
+        private readonly EventBase<Subscription<T1, T2, T3, T4, T5>> _event;
         private readonly Action<T1, T2, T3, T4, T5> _handler;
 
         public Subscription(
             Subscription<T1, T2, T3, T4, T5> previous,
-            Event<T1, T2, T3, T4, T5> e,
+            EventBase<Subscription<T1, T2, T3, T4, T5>> e,
             Action<T1, T2, T3, T4, T5> handler)
             : base(previous)
         {

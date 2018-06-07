@@ -12,11 +12,6 @@ namespace Suby
         public void Raise() => ForAllActive(s => s.Notify());
     }
 
-
-
-
-
-    
     public class Event<T>: EventBase<Subscription<T>>, IEvent<T>
     {
         public Event() : base(new Subscription<T>(null, null, null)) {}
