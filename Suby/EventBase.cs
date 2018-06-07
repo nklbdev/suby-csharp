@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace Suby
 {
@@ -7,25 +7,42 @@ namespace Suby
         private readonly TSubscription _first;
         protected TSubscription Last;
 
-        protected TSubscription AddSubscription(TSubscription s)
+        protected virtual TSubscription AddSubscription(TSubscription s)
         {
+            s.Previous = Last;
             Last.Next = s;
             Last = s;
             return s;
         }
 
-        protected IEnumerable<TSubscription> GetCurrentTrunk()
+        protected virtual void ForAllActive(Action<TSubscription> action)
         {
-            var s = _first.Next;
-            while (s != null)
+            var current = _first;
+            var last = Last;
+            while (current != last && current.Next != null)
             {
-                yield return s;
-                s = s.Next;
+                current = current.Next;
+                action(current);
+                current = ToTrunk(current);
+                last = ToTrunk(last);
             }
         }
 
-        internal void OnDisposed(TSubscription s)
+        private static TSubscription ToTrunk(TSubscription subscription)
         {
+            while (subscription.IsDisposed)
+                subscription = subscription.Previous;
+            return subscription;
+        }
+
+        internal virtual void DisposeSubscription(TSubscription s)
+        {
+            if (s.IsDisposed)
+                return;
+            if (s.Next != null)
+                s.Next.Previous = s.Previous;
+            s.Previous.Next = s.Next;
+            s.Next = null;
             if (s == Last)
                 Last = s.Previous;
         }
